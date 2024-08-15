@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 
 function Die(props) {
 
@@ -12,3 +13,11 @@ function Die(props) {
 }
 
 export default Die
+
+Die.propTypes = {
+    key: PropTypes.string,
+    id: PropTypes.string,
+    value: PropTypes.number,
+    isHold: PropTypes.bool,
+    holdDice: PropTypes.func
+}
