@@ -9,6 +9,7 @@ function App() {
 
   const [dice, setDice] = useState(newDice())
   const [tenzies, setTenzies] = useState(false)
+  const [rolls, setRolls] = useState(0)
 
   useEffect(()=>{
     const areHeld = dice.every(die => die.isHold === true)
@@ -30,7 +31,9 @@ function App() {
     if (tenzies){
       setTenzies(false)
       setDice(newDice())
+      setRolls(0)
     } else {
+      setRolls(prevRolls => prevRolls + 1)
       setDice(prevDice => prevDice.map(die => {
         return !die.isHold ? ({
           ...die,
@@ -64,6 +67,7 @@ function App() {
         </div>
 
         <button className='tenzies-button' onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+        {tenzies && <p className='tenzies-body'> Solved in {rolls} rolls</p>}
       </div>
     </main>
   )
