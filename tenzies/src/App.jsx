@@ -10,12 +10,14 @@ function App() {
   const [dice, setDice] = useState(newDice())
   const [tenzies, setTenzies] = useState(false)
   const [rolls, setRolls] = useState(0)
+  const [time, setTime] = useState(Date.now())
 
   useEffect(()=>{
     const areHeld = dice.every(die => die.isHold === true)
     const areSameValue = dice.every(die => die.value === dice[0].value)
     if (areHeld && areSameValue){
       setTenzies(true)
+      setTime(Date.now() - time)
     }
   }, [dice])
 
@@ -32,6 +34,7 @@ function App() {
       setTenzies(false)
       setDice(newDice())
       setRolls(0)
+      setTime(Date.now())
     } else {
       setRolls(prevRolls => prevRolls + 1)
       setDice(prevDice => prevDice.map(die => {
@@ -67,7 +70,9 @@ function App() {
         </div>
 
         <button className='tenzies-button' onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
-        {tenzies && <p className='tenzies-body'> Solved in {rolls} rolls</p>}
+        {tenzies && <p className='tenzies-body'> Solved in: </p>}
+        {tenzies && <p className='tenzies-body'> {rolls} rolls</p>}
+        {tenzies && <p className='tenzies-body'> {time/1000} seconds</p>}
       </div>
     </main>
   )
