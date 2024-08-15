@@ -4,7 +4,6 @@ import Confetti from 'react-confetti'
 import Die from './components/Die'
 import './App.css'
 
-
 function App() {
 
   const [dice, setDice] = useState(newDice())
@@ -20,6 +19,17 @@ function App() {
       setTime(Date.now() - time)
     }
   }, [dice])
+
+  useEffect(()=>{
+    if (tenzies) {
+      const bestTime = localStorage.getItem("BestTime")
+      if (bestTime === null) {
+        localStorage.setItem("BestTime", time)
+      } else if (bestTime > time) {
+        localStorage.setItem("BestTime", time)
+      }
+    }
+  }, [tenzies])
 
   function newDice(){
     const newDice = [];
@@ -56,7 +66,15 @@ function App() {
     }))
   }
 
-  const diceElements = dice.map((die) => <Die key={die.key} id={die.key} value={die.value} isHold={die.isHold} holdDice={holdDice}/>)
+  const diceElements = dice.map((die) => (
+    <Die 
+      key={die.key} 
+      id={die.key} 
+      value={die.value} 
+      isHold={die.isHold} 
+      holdDice={holdDice}
+    />
+  ))
 
   return (
     <main>
@@ -71,8 +89,8 @@ function App() {
 
         <button className='tenzies-button' onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
         {tenzies && <p className='tenzies-body'> Solved in: </p>}
-        {tenzies && <p className='tenzies-body'> {rolls} rolls</p>}
-        {tenzies && <p className='tenzies-body'> {time/1000} seconds</p>}
+        {tenzies && <p className='tenzies-body'> {rolls} rolls and {time/1000} seconds</p>}
+        <p className='tenzies-body'>Best Time: {localStorage.getItem("BestTime")/1000} seconds</p>
       </div>
     </main>
   )
