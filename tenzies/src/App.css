@@ -15,7 +15,7 @@ main {
   /* height: 100%; */
   border-radius: 10px;
   background-color: #F5F5F5;
-  padding: 35px 33px;
+  padding: 30px 46px;
 
   display: flex;
   flex-direction: column;
@@ -24,16 +24,17 @@ main {
 }
 
 .tenzies-title {
-  margin-bottom: 0;
+  margin: 0;
   font-family: 'Karla', sans-serif;
   font-style: normal;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 750;
   line-height: auto;
   letter-spacing: -3%;
   text-align: center;
   vertical-align: center;
   color: #2B283A;
+  cursor: default;
 }
 
 .tenzies-body {
@@ -46,6 +47,7 @@ main {
   text-align: center;
   vertical-align: center;
   color: #4A4E74;
+  cursor: default;
 }
 
 .dice {
@@ -72,7 +74,8 @@ main {
 }
 
 .die:hover {
-  transform: translateY(-1px);
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
 }
 
 .die:active {
@@ -116,7 +119,8 @@ main {
 
 .tenzies-button:hover {
   color: #FFFFFF;
-  background-color: #0B2434
+  background-color: #0B2434;
+  transform: translateY(-2px);
 }
 
 .tenzies-button:active {
